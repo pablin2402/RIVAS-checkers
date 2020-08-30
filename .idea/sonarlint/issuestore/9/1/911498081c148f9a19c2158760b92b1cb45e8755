@@ -1,0 +1,11 @@
+
+Z	java:S1062"9Replace this use of System.out or System.err by a logger.(ôË™âùÿÿÿÿ8„ŒƒíÃ.
+G
+java:S1481U"*Remove this unused "child" local variable.(˜çÜ‚8Åº¹ìÃ.
+G
+java:S1481J"*Remove this unused "child" local variable.(˜çÜ‚8Åº¹ìÃ.
+Z	java:S106O"9Replace this use of System.out or System.err by a logger.(¡Çôúÿÿÿÿ8îáùìÃ.
+o
+java:S3776="RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ä½º˜8Åº¹ìÃ.
+X	java:S125"<This block of commented-out lines of code should be removed.(Ï¹Ãí8Ñ´®íÃ.
+X	java:S125"<This block of commented-out lines of code should be removed.(„òûÂ8ãôáíÃ.

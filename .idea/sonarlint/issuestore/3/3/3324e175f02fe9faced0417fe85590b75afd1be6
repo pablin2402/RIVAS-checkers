@@ -1,0 +1,24 @@
+
+c
+java:S1182)"HUse super.clone() to create and seed the cloned instance to be returned.(ãÚÕçıÿÿÿÿ
+O	java:S106ü"9Replace this use of System.out or System.err by a logger.(•¬ªĞ
+T	java:S106ğ"9Replace this use of System.out or System.err by a logger.(Ï×¦½úÿÿÿÿ
+T	java:S106ã"9Replace this use of System.out or System.err by a logger.(İ˜Œƒøÿÿÿÿ
+N	java:S106Q"9Replace this use of System.out or System.err by a logger.(ˆ¦¡¥
+n
+java:S2975)"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ãÚÕçıÿÿÿÿ
+C
+java:S1602â",Remove useless curly braces around statement(Ãé¥ó
+N	java:S106T"9Replace this use of System.out or System.err by a logger.(Ù©È±
+i
+java:S3776†"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(¡Åû
+N	java:S106ş"9Replace this use of System.out or System.err by a logger.(å®µ
+S	java:S106Z"9Replace this use of System.out or System.err by a logger.(ó†Äªıÿÿÿÿ
+N	java:S106V"9Replace this use of System.out or System.err by a logger.(ñ› Ğ
+t
+java:S3012-"YUse "Arrays.copyOf", "Arrays.asList", "Collections.addAll" or "System.arraycopy" instead.(¦ğ®üÿÿÿÿ
+S	java:S106S"9Replace this use of System.out or System.err by a logger.(ó†Äªıÿÿÿÿ
+S	java:S106X"9Replace this use of System.out or System.err by a logger.(„–‘§úÿÿÿÿ
+S	java:S106["9Replace this use of System.out or System.err by a logger.(©º†îùÿÿÿÿ
+i
+java:S3776¶"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ïÛÑº
