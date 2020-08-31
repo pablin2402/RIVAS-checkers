@@ -7,3 +7,9 @@ X
 (src/main/java/checkers/CheckersMove.java,0\e\0ec4a99cac17acaf1ab1522949b1dfa01348da8e
 O
 src/main/java/checkers/App.java,c\8\c8385e540be2759fe59ce1edc4ac6266b80b2829
+Z
+*src/main/java/checkers/KeyboardPlayer.java,0\2\026e1c766cfb6bfca48adff792f750639219baea
+Y
+)src/main/java/checkers/CheckersBoard.java,3\3\3324e175f02fe9faced0417fe85590b75afd1be6
+c
+3src/main/java/checkers/bot/rivas/CheckersPablo.java,9\a\9a77b3f3dd79f821fe0b6b022e730f0e7695a914
