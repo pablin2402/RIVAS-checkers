@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RivasBot implements CheckersPlayer {
-    private static final int LEVEL = 6;
-    private static List<CheckersMove> children ;
+    private static final int LEVEL = 5;
+    List<CheckersMove> children ;
 
     @Override
     public CheckersMove play(CheckersBoard board) {
@@ -27,14 +27,12 @@ public class RivasBot implements CheckersPlayer {
                 .toPosition(getBestMove(LEVEL,board).getEndRow(),getBestMove(LEVEL,board).getEndCol())
                 .build();
     }
-
     public CheckersMove getBestMove(int level, CheckersBoard board) {
         int maxUtility = -Integer.MAX_VALUE;
         generateSuccessors(board);
         CheckersMove bestMove = null;
         for (CheckersMove child : children) {
             int utility = getUtility(level - 1, CheckersBoard.Player.BLACK, board);
-
             if (utility >maxUtility ) {
                 maxUtility = utility;
                 bestMove = child;
@@ -42,8 +40,6 @@ public class RivasBot implements CheckersPlayer {
         }
         return bestMove;
     }
-
-
     public void generateSuccessors(CheckersBoard board) {
        List<CheckersMove> successors = new ArrayList<>(100);
 
@@ -58,41 +54,26 @@ public class RivasBot implements CheckersPlayer {
         }
         this.children = successors;
     }
-    /* TODO: need to implement this method , but i cant access to board and current player */
-    /*
-    public int utility() {
-        int result = 0;
-        for ( int i = 0; i < 8; i++ ) {
-            for ( int j = 0; j < 8; j++ ) {
-                if ( board[ i ][ j ] == 'b' ) {
-                    result += 1;
-                } else if ( board[ i ][ j ] == Character.toUpperCase( 'b' ) ) {
-                    result += 2;
-                } else if ( board[ i ][ j ] == 'r' ) {
-                    result -= 1;
-                } else if ( board[ i ][ j ] == Character.toUpperCase( 'r' ) ) {
-                    result -= 2;
-                }
-            }
+    public int getUtility(int level, CheckersBoard.Player actualplayer, CheckersBoard board) {
+        if (children.isEmpty()){
+            return board.reward();
+
         }
-        return result;
-    }*/
-    public int getUtility(int level, CheckersBoard.Player actualplayer,CheckersBoard board) {
+        if (level == 0) {
+            return board.reward();
+        }
+
         generateSuccessors(board);
 
-        if (level == 0){
-            return board.utility();
-        }
-        if (children.isEmpty() ) {
-            return board.utility();
-        }
         // it is my turn, so i am going to pick the best choice
         if (CheckersBoard.Player.BLACK == actualplayer) {
             int maxUtility = Integer.MIN_VALUE;
             for (CheckersMove child : children) {
-                int score = getUtility(level - 1, actualplayer,board);
-                if (score > maxUtility)
+
+                int score = getUtility(level - 1, actualplayer, board);
+                if (score > maxUtility) {
                     maxUtility = score;
+                }
             }
             return maxUtility;
         } else {
@@ -124,5 +105,27 @@ public class RivasBot implements CheckersPlayer {
 
         }
     }
+    /* TODO: need to implement this method , but i cant access to board and current player */
+    /*
+    public int reward() {
+		int result = 0;
+		for ( int i = 0; i < 8; i++ ) {
+			for ( int j = 0; j < 8; j++ ) {
+				if ( board[ i ][ j ] == 'b' ) {
+					result += 1;
+				} else if ( board[ i ][ j ] == 'r' ) {
+					result -= 1;
+				} else if ( board[ i ][ j ] == Character.toUpperCase( 'b' ) ) {
+					result += 2;
+				} else if ( board[ i ][ j ] == Character.toUpperCase( 'r' ) ) {
+					result -= 2;
+				}
+			}
+		}
+		return result;
+	}*/
+
+
+
 
 }
