@@ -5,10 +5,12 @@ import checkers.CheckersMove;
 import checkers.CheckersPlayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RivasBot implements CheckersPlayer {
-    private static final int LEVEL = 5;
+    private static final int LEVEL = 7;
     List<CheckersMove> children ;
 
     @Override
@@ -17,71 +19,73 @@ public class RivasBot implements CheckersPlayer {
         List<CheckersMove> possibleCaptures = board.possibleCaptures();
         if (possibleCaptures.isEmpty()) {
             bestMove(board);
-            return CheckersMove.builder()
-                    .fromPosition(getBestMove(LEVEL,board).getStartRow(), getBestMove(LEVEL,board).getStartCol())
-                    .toPosition(getBestMove(LEVEL,board).getEndRow(),getBestMove(LEVEL,board).getEndCol())
-                    .build();
+            return getBuild(board);
         }
+        return getBuild(board);
+    }
+
+    private CheckersMove getBuild(CheckersBoard board) {
         return CheckersMove.builder()
-                .fromPosition(getBestMove(LEVEL,board).getStartRow(), getBestMove(LEVEL,board).getStartCol())
-                .toPosition(getBestMove(LEVEL,board).getEndRow(),getBestMove(LEVEL,board).getEndCol())
+                .fromPosition(getBestMove(LEVEL, board).getStartRow(), getBestMove(LEVEL, board).getStartCol())
+                .toPosition(getBestMove(LEVEL, board).getEndRow(), getBestMove(LEVEL, board).getEndCol())
                 .build();
     }
+
     public CheckersMove getBestMove(int level, CheckersBoard board) {
         int maxUtility = -Integer.MAX_VALUE;
         generateSuccessors(board);
         CheckersMove bestMove = null;
+        return getCheckersMove(level, board, maxUtility, bestMove);
+    }
+
+    private CheckersMove getCheckersMove(int level, CheckersBoard board, int maxUtility, CheckersMove bestMove) {
         for (CheckersMove child : children) {
             int utility = getUtility(level - 1, CheckersBoard.Player.BLACK, board);
-            if (utility >maxUtility ) {
+            if (utility > maxUtility) {
                 maxUtility = utility;
                 bestMove = child;
             }
         }
         return bestMove;
     }
+
     public void generateSuccessors(CheckersBoard board) {
        List<CheckersMove> successors = new ArrayList<>(100);
-
-
-        List<CheckersMove> possibleCaptures = board.possibleCaptures();
-        if (possibleCaptures.isEmpty()) {
+       List<CheckersMove> possibleCaptures = board.possibleCaptures();
+       if (possibleCaptures.isEmpty()) {
             List<CheckersMove> possibleMoves = board.possibleMoves();
             successors.addAll(possibleMoves);
-
-        }else{
+       }else{
             successors.addAll(possibleCaptures);
-        }
+       }
         this.children = successors;
     }
-    public int getUtility(int level, CheckersBoard.Player actualplayer, CheckersBoard board) {
+    public int getUtility(int level, CheckersBoard.Player currentPlayer, CheckersBoard board) {
         if (children.isEmpty()){
             return board.reward();
-
         }
         if (level == 0) {
             return board.reward();
         }
-
         generateSuccessors(board);
-
-        // it is my turn, so i am going to pick the best choice
-        if (CheckersBoard.Player.BLACK == actualplayer) {
+        Map<CheckersMove, Integer> utilityMap = new HashMap<>();
+        for (CheckersMove successor: children) {
+            utilityMap.put(successor, getUtility(level-1,currentPlayer, board));
+        }
+            // it is my turn, so i am going to pick the best choice
+        if (CheckersBoard.Player.BLACK == currentPlayer) {
             int maxUtility = Integer.MIN_VALUE;
-            for (CheckersMove child : children) {
-
-                int score = getUtility(level - 1, actualplayer, board);
-                if (score > maxUtility) {
-                    maxUtility = score;
+            for (Map.Entry<CheckersMove, Integer> utilityEntry: utilityMap.entrySet()) {
+                    if (utilityEntry.getValue() > maxUtility) {
+                        maxUtility = utilityEntry.getValue();
+                    }
                 }
-            }
-            return maxUtility;
+             return maxUtility;
         } else {
             int minUtility = Integer.MAX_VALUE; // it is a kind of cheat
-            for (CheckersMove child : children) {
-                int score = getUtility(level - 1, actualplayer, board);
-                if (score < minUtility) {
-                    minUtility = score;
+            for (Map.Entry<CheckersMove, Integer> utilityEntry: utilityMap.entrySet()) {
+                if (utilityEntry.getValue() < minUtility) {
+                    minUtility = utilityEntry.getValue();
                 }
             }
             return minUtility;
@@ -89,9 +93,9 @@ public class RivasBot implements CheckersPlayer {
     }
 
     private void bestMove(CheckersBoard board){
-        System.out.println("me movere desde :"+ getBestMove(LEVEL,board).getStartRow() +" col: "+getBestMove(LEVEL,board).getStartRow());
-        System.out.println("a");
-        System.out.println(getBestMove(LEVEL,board).getEndRow()+ " a "+getBestMove(LEVEL,board).getEndCol());
+        System.out.println("Mi movimiento será de :"+ getBestMove(LEVEL,board).getStartRow() +" y: "+getBestMove(LEVEL,board).getStartCol());
+        System.out.println("A: ");
+        System.out.println(getBestMove(LEVEL,board).getEndRow()+ " y: "+getBestMove(LEVEL,board).getEndCol());
 
     }
     private void movementsList (){

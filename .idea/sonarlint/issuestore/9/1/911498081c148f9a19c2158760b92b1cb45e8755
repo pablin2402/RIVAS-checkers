@@ -1,19 +1,14 @@
 
-O
-java:S1135j"2Complete the task associated to this TODO comment.(•˜Ñ®8ù‡¨Ä.
-G
-java:S1481C"*Remove this unused "child" local variable.(˜çÜ‚8®ì£Ä.
-]	java:S125l"<This block of commented-out lines of code should be removed.(ÁõÆÆøÿÿÿÿ8ù‡¨Ä.
-G
-java:S1481O"*Remove this unused "child" local variable.(˜çÜ‚8¬Óğ…Ä.
-U	java:S106\"9Replace this use of System.out or System.err by a logger.(…öÒ¬8ÉÙâˆÄ.
-U	java:S106["9Replace this use of System.out or System.err by a logger.(ı³ÓÆ8ÉÙâˆÄ.
-Z	java:S106b"9Replace this use of System.out or System.err by a logger.(ã¼ñşÿÿÿÿ8ÉÙâˆÄ.
-Z	java:S106Z"9Replace this use of System.out or System.err by a logger.(×÷—”ûÿÿÿÿ8ÉÙâˆÄ.
-Z	java:S106I"9Replace this use of System.out or System.err by a logger.(¡Çôúÿÿÿÿ8®ì£Ä.
 T
-java:S1144_"2Remove this unused private "movementsList" method.(§èÂÍùÿÿÿÿ8¿ùåŒÄ.
-Z	java:S106`"9Replace this use of System.out or System.err by a logger.(‘´»›ûÿÿÿÿ8ÉÙâˆÄ.
-Z	java:S106f"9Replace this use of System.out or System.err by a logger.(à¸°úÿÿÿÿ8ÉÙâˆÄ.
-T	java:S106e"9Replace this use of System.out or System.err by a logger.(ÜÄ™g8ÉÙâˆÄ.
-Z	java:S106d"9Replace this use of System.out or System.err by a logger.(İ÷ üÿÿÿÿ8ÉÙâˆÄ.
+java:S1144e"2Remove this unused private "movementsList" method.(§èÂÍùÿÿÿÿ8¿ùåŒÄ.
+T	java:S106k"9Replace this use of System.out or System.err by a logger.(ÜÄ™g8ÉÙâˆÄ.
+Z	java:S106h"9Replace this use of System.out or System.err by a logger.(ã¼ñşÿÿÿÿ8ÉÙâˆÄ.
+U	java:S106b"9Replace this use of System.out or System.err by a logger.(ìšóõ8ÉÙâˆÄ.
+Z	java:S106a"9Replace this use of System.out or System.err by a logger.(½–ï¾ùÿÿÿÿ8ÉÙâˆÄ.
+Z	java:S106f"9Replace this use of System.out or System.err by a logger.(‘´»›ûÿÿÿÿ8ÉÙâˆÄ.
+Z	java:S106j"9Replace this use of System.out or System.err by a logger.(İ÷ üÿÿÿÿ8ÉÙâˆÄ.
+Z	java:S106l"9Replace this use of System.out or System.err by a logger.(à¸°úÿÿÿÿ8ÉÙâˆÄ.
+U	java:S106`"9Replace this use of System.out or System.err by a logger.(Ä´ºÌ8ÉÙâˆÄ.
+O
+java:S1135p"2Complete the task associated to this TODO comment.(•˜Ñ®8ù‡¨Ä.
+]	java:S125r"<This block of commented-out lines of code should be removed.(ºÔ¦±øÿÿÿÿ8ù‡¨Ä.
