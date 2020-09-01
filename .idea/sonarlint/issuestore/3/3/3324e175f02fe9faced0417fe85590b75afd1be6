@@ -1,26 +1,26 @@
 
+Z	java:S106z"9Replace this use of System.out or System.err by a logger.(„–‘§úÿÿÿÿ8ê‡½¹Ä.
+Z	java:S106}"9Replace this use of System.out or System.err by a logger.(©º†îùÿÿÿÿ8ê‡½¹Ä.
 u
 java:S3776å"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(ð½å–þÿÿÿÿ8ê‡½¹Ä.
 p
 java:S3776®"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(•‹¼–8ê‡½¹Ä.
+V	java:S106Î"9Replace this use of System.out or System.err by a logger.(•¬ªÐ8ê‡½¹Ä.
+{	java:S135è"YReduce the total number of break and continue statements in this loop to use at most one.(¯š¸Ôýÿÿÿÿ8§Ñ³²Ä.
 U	java:S106Ð"9Replace this use of System.out or System.err by a logger.(å®µ8ê‡½¹Ä.
-[	java:S106´"9Replace this use of System.out or System.err by a logger.(Ý˜Œƒøÿÿÿÿ8ê‡½¹Ä.
-U	java:S106x"9Replace this use of System.out or System.err by a logger.(ñ› Ð8ê‡½¹Ä.
+[	java:S106Û"9Replace this use of System.out or System.err by a logger.(ì¿žÐúÿÿÿÿ8ê‡½¹Ä.
+[	java:S106Â"9Replace this use of System.out or System.err by a logger.(Ï×¦½úÿÿÿÿ8ê‡½¹Ä.
 u
 java:S3776¬"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(ü«ÝÙüÿÿÿÿ8ê‡½¹Ä.
-[	java:S106Û"9Replace this use of System.out or System.err by a logger.(ì¿žÐúÿÿÿÿ8ê‡½¹Ä.
-U	java:S106s"9Replace this use of System.out or System.err by a logger.(ˆ¦¡¥8ê‡½¹Ä.
-Z	java:S106}"9Replace this use of System.out or System.err by a logger.(©º†îùÿÿÿÿ8ê‡½¹Ä.
-U	java:S106v"9Replace this use of System.out or System.err by a logger.(Ù©È±8ê‡½¹Ä.
 j
 java:S11829"HUse super.clone() to create and seed the cloned instance to be returned.(ãÚÕçýÿÿÿÿ8ê‡½¹Ä.
-u
-java:S29759"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ãÚÕçýÿÿÿÿ8ê‡½¹Ä.
-{	java:S135è"YReduce the total number of break and continue statements in this loop to use at most one.(¯š¸Ôýÿÿÿÿ8§Ñ³²Ä.
-Z	java:S106z"9Replace this use of System.out or System.err by a logger.(„–‘§úÿÿÿÿ8ê‡½¹Ä.
 Z	java:S106u"9Replace this use of System.out or System.err by a logger.(ó†Äªýÿÿÿÿ8ê‡½¹Ä.
+U	java:S106x"9Replace this use of System.out or System.err by a logger.(ñ› Ð8ê‡½¹Ä.
+[	java:S106´"9Replace this use of System.out or System.err by a logger.(Ý˜Œƒøÿÿÿÿ8ê‡½¹Ä.
+Z	java:S106|"9Replace this use of System.out or System.err by a logger.(ó†Äªýÿÿÿÿ8ê‡½¹Ä.
 J
 java:S1602³",Remove useless curly braces around statement(Ãé¥ó8ê‡½¹Ä.
-[	java:S106Â"9Replace this use of System.out or System.err by a logger.(Ï×¦½úÿÿÿÿ8ê‡½¹Ä.
-Z	java:S106|"9Replace this use of System.out or System.err by a logger.(ó†Äªýÿÿÿÿ8ê‡½¹Ä.
-V	java:S106Î"9Replace this use of System.out or System.err by a logger.(•¬ªÐ8ê‡½¹Ä.
+u
+java:S29759"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ãÚÕçýÿÿÿÿ8ê‡½¹Ä.
+U	java:S106v"9Replace this use of System.out or System.err by a logger.(Ù©È±8ê‡½¹Ä.
+U	java:S106s"9Replace this use of System.out or System.err by a logger.(ˆ¦¡¥8ê‡½¹Ä.
