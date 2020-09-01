@@ -13,7 +13,6 @@ public class App {
     public static void main(String[] args) {
         CheckersBoard game = CheckersBoard.initBoard();
         CheckersPlayer player2 = new GrayRandomBot();
-        // CheckersPlayer player1 = new KeyboardPlayer();
         CheckersPlayer player1 = new RivasBot();
 
         Optional<CheckersPlayer> loser = game.play(player1, player2);

@@ -1,14 +1,15 @@
 
+Z	java:S106K"9Replace this use of System.out or System.err by a logger.(ã¼ñşÿÿÿÿ8ûİ¯¹Ä.
+Z	java:S106$"9Replace this use of System.out or System.err by a logger.(½–ï¾ùÿÿÿÿ8ÉÙâˆÄ.
 T
-java:S1144e"2Remove this unused private "movementsList" method.(§èÂÍùÿÿÿÿ8¿ùåŒÄ.
-T	java:S106k"9Replace this use of System.out or System.err by a logger.(ÜÄ™g8ÉÙâˆÄ.
-Z	java:S106h"9Replace this use of System.out or System.err by a logger.(ã¼ñşÿÿÿÿ8ÉÙâˆÄ.
-U	java:S106b"9Replace this use of System.out or System.err by a logger.(ìšóõ8ÉÙâˆÄ.
-Z	java:S106a"9Replace this use of System.out or System.err by a logger.(½–ï¾ùÿÿÿÿ8ÉÙâˆÄ.
-Z	java:S106f"9Replace this use of System.out or System.err by a logger.(‘´»›ûÿÿÿÿ8ÉÙâˆÄ.
-Z	java:S106j"9Replace this use of System.out or System.err by a logger.(İ÷ üÿÿÿÿ8ÉÙâˆÄ.
-Z	java:S106l"9Replace this use of System.out or System.err by a logger.(à¸°úÿÿÿÿ8ÉÙâˆÄ.
-U	java:S106`"9Replace this use of System.out or System.err by a logger.(Ä´ºÌ8ÉÙâˆÄ.
-O
-java:S1135p"2Complete the task associated to this TODO comment.(•˜Ñ®8ù‡¨Ä.
-]	java:S125r"<This block of commented-out lines of code should be removed.(ºÔ¦±øÿÿÿÿ8ù‡¨Ä.
+java:S1144H"2Remove this unused private "movementsList" method.(§èÂÍùÿÿÿÿ8ûİ¯¹Ä.
+U	java:S106%"9Replace this use of System.out or System.err by a logger.(ìšóõ8ÉÙâˆÄ.
+Z	java:S106M"9Replace this use of System.out or System.err by a logger.(İ÷ üÿÿÿÿ8ûİ¯¹Ä.
+U	java:S106#"9Replace this use of System.out or System.err by a logger.(Ä´ºÌ8ÉÙâˆÄ.
+Z	java:S106I"9Replace this use of System.out or System.err by a logger.(‘´»›ûÿÿÿÿ8ûİ¯¹Ä.
+T	java:S106N"9Replace this use of System.out or System.err by a logger.(ÜÄ™g8ûİ¯¹Ä.
+Z	java:S106O"9Replace this use of System.out or System.err by a logger.(à¸°úÿÿÿÿ8ûİ¯¹Ä.
+\
+java:S1854]"?Remove this useless assignment to local variable "otherPlayer".(ÇÏÍÄ8èíòºÄ.
+M
+java:S1481]"0Remove this unused "otherPlayer" local variable.(ÇÏÍÄ8èíòºÄ.
