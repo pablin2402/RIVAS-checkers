@@ -12,20 +12,6 @@ import java.util.Objects;
     public class CheckersPablo extends CheckersBoard {
     List<CheckersMove> successors = new ArrayList<>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        CheckersPablo that = (CheckersPablo) o;
-        return Objects.equals(successors, that.successors);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), successors);
-    }
-
     public int heuristic(CheckersBoard b) {
         int result = 0;
         char[][] board = b.getBoard();
@@ -49,7 +35,7 @@ import java.util.Objects;
         startingPlayer = CheckersBoard.initBoard().getCurrentPlayer();
         generatePossibleMovesAndCaptures(board);
         if (successors.isEmpty()){
-            return  null;
+            return null;
         }
         return getCheckersMove(board, myPlayer, level, startingPlayer);
     }
@@ -64,7 +50,8 @@ import java.util.Objects;
              } catch (BadMoveException ex) {
                  System.err.println(ex.getMessage());
              }
-             int childScore = getUtility(level - 1, otherPlayer(startingPlayer), child, !myPlayer);
+             MyPlayerGame myPlayerGame = new MyPlayerGame( child,!myPlayer,level - 1,otherPlayer(startingPlayer));
+             int childScore = getUtility(myPlayerGame);
              if (childScore > maxValue){
                  maxValue= childScore;
                  bestMoveOption = successor;
@@ -82,24 +69,21 @@ import java.util.Objects;
             successors = board.possibleCaptures();
         }
     }
+    private int getUtility(MyPlayerGame myPlayer) {
 
-    private int getUtility(int level, CheckersBoard.Player player, CheckersBoard board, boolean myPlayer) {
         if (successors.isEmpty()){
-            return heuristic(board);
+            return heuristic(myPlayer.getBoard());
         }
-        if (level == 0) {
-            return heuristic(board);
+        if (myPlayer.getLevel() == 0) {
+            return heuristic(myPlayer.getBoard());
         }
-        generatePossibleMovesAndCaptures(board);
-
-
-        if (myPlayer) {
-            return maxUtilityForMyPlayer(level, player, board, myPlayer);
+        generatePossibleMovesAndCaptures(myPlayer.getBoard());
+        if (myPlayer.isMyPlayer()) {
+            return maxUtilityForMyPlayer(myPlayer.getLevel(), myPlayer.getStartingPlayer(), myPlayer.getBoard(), myPlayer.isMyPlayer());
         }else {
-            return minUtilityForOtherBot(level, player, board, myPlayer);
+            return minUtilityForOtherBot(myPlayer.getLevel(), myPlayer.getStartingPlayer(), myPlayer.getBoard(), myPlayer.isMyPlayer());
         }
     }
-
     private int minUtilityForOtherBot(int level, Player player, CheckersBoard board, boolean myPlayer) {
         CheckersBoard child;
         int minUtility= Integer.MAX_VALUE;
@@ -111,7 +95,9 @@ import java.util.Objects;
                 System.err.println(ex.getMessage());
 
             }
-            int utility = getUtility(level - 1, otherPlayer(player), child, !myPlayer);
+            MyPlayerGame myPlayerGame = new MyPlayerGame( child,!myPlayer,level - 1,otherPlayer(player));
+
+            int utility = getUtility(myPlayerGame);
             if (utility < minUtility) {
                 minUtility = utility;
             }
@@ -130,11 +116,27 @@ import java.util.Objects;
                 System.err.println(ex.getMessage());
 
             }
-            int utility = getUtility(level - 1, otherPlayer(player), child, !myPlayer);
+            MyPlayerGame myPlayerGame = new MyPlayerGame( child,!myPlayer,level - 1,otherPlayer(player));
+
+            int utility = getUtility(myPlayerGame);
             if (utility > maxUtility) {
                 maxUtility = utility;
             }
         }
         return maxUtility;
     }
-}
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            if (!super.equals(o)) return false;
+            CheckersPablo that = (CheckersPablo) o;
+            return Objects.equals(successors, that.successors);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(super.hashCode(), successors);
+        }
+
+    }
