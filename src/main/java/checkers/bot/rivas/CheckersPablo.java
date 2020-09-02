@@ -7,7 +7,9 @@ import checkers.exception.BadMoveException;
 import java.util.*;
 
 public class CheckersPablo extends CheckersBoard {
+    List<CheckersMove> successors = new ArrayList<>();
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -29,7 +31,7 @@ public class CheckersPablo extends CheckersBoard {
                 if ( board[ i ][ j ] == BLACK_PLAIN ) {
                     result += 2;
                 } else if ( board[ i ][ j ] == RED_PLAIN ) {
-                    result -= 2;
+                    result -= 1;
                 } else if (board[ i ][ j ] == BLACK_CROWNED) {
                     result += 5;
                 } else if (board[ i ][ j ] == RED_CROWNED) {
@@ -39,57 +41,38 @@ public class CheckersPablo extends CheckersBoard {
         }
         return result;
     }
-    List<CheckersMove> successors = new ArrayList<>();
-
     protected CheckersMove getBestMove(CheckersBoard board, boolean myPlayer, int level)  {
         CheckersBoard.Player startingPlayer;
         startingPlayer = CheckersBoard.initBoard().getCurrentPlayer();
 
-        generatePossibleMoves(board);
         CheckersBoard child = null;
-
-
-        List<Integer> heuristics = new ArrayList<>(100);
+        CheckersMove check= null;
+        generatePossibleMoves(board);
         if (successors.isEmpty()){
             return  null;
         }
+        return getCheckersMove(board, myPlayer, level, startingPlayer, check);
+    }
+
+    private CheckersMove getCheckersMove(CheckersBoard board, boolean myPlayer, int level, Player startingPlayer, CheckersMove check) {
+        CheckersBoard child;
+        int result = Integer.MIN_VALUE;
         for (CheckersMove successor : successors) {
-            child = board.clone();
-            try {
-                child.processMove(successor);
-            } catch (BadMoveException ex) {
-                System.err.println(ex.getMessage());
+             child = board.clone();
+             try {
+                 child.processMove(successor);
+             } catch (BadMoveException ex) {
+                 System.err.println(ex.getMessage());
 
-            }
-            heuristics.add(getUtility(level - 1, otherPlayer(startingPlayer), child, !myPlayer));
-        }
-        CheckersMove checkersMove = null;
-        int maxUtility = Integer.MIN_VALUE;
-        for (Integer heuristic : heuristics) {
-            if (heuristic > maxUtility) {
-                maxUtility = heuristic;
+             }
+             int childScore = getUtility(level - 1, otherPlayer(startingPlayer), child, !myPlayer);
+             if (childScore > result){
+                result= childScore;
+                check = successor;
+             }
+         }
 
-            }
-        }
-        System.out.println(maxUtility);
-
-        System.out.println("ANTES");
-        for (int i=0; i< successors.size();i++){
-            System.out.println(":"+successors.get(i).getStartCol());
-        }
-        for (int i = 0; i < heuristics.size(); i++) {
-            if (heuristics.get(i) < maxUtility) {
-                    heuristics.remove(i);
-                    successors.remove(i);
-                    i--;
-            }
-        }
-        System.out.println("DESPUES");
-        for (int i=0; i<successors.size();i++){
-            System.out.println(":"+successors.get(i).getStartCol());
-        }
-        Random rand = new Random();
-        return successors.get(rand.nextInt(successors.size()));
+        return check;
     }
 
     private void generatePossibleMoves(CheckersBoard board) {
@@ -102,35 +85,49 @@ public class CheckersPablo extends CheckersBoard {
     }
 
     private int getUtility(int level, CheckersBoard.Player player, CheckersBoard board, boolean myPlayer) {
-        if (possibleMoves().isEmpty()){
+        if (successors.isEmpty()){
             return heuristic(board);
         }
         if (level == 0) {
             return heuristic(board);
         }
-        List<CheckersMove> possibleMoves = board.possibleMoves();
-        CheckersBoard checkersBoard = null;
+      //  List<CheckersMove> possibleMoves = board.possibleMoves();
+        generatePossibleMoves(board);
+
+        CheckersBoard child = null;
+
         if (myPlayer) {
             int maxUtility= Integer.MIN_VALUE;
-            for(int i=0; i<possibleMoves.size(); i++){
-                checkersBoard= board.clone();
-                int result = getUtility(level-1, otherPlayer(player),checkersBoard, !myPlayer);
+            for(int i=0; i<successors.size(); i++){
+               // checkersBoard= board.clone();
+                child = board.clone();
+                try {
+                    child.processMove(successors.get(i));
+                } catch (BadMoveException ex) {
+                    System.err.println(ex.getMessage());
+
+                }
+                int result = getUtility(level-1, otherPlayer(player),child, !myPlayer);
                 if(result >maxUtility){
                     maxUtility = result;
                 }
             }
-            System.out.println("MAX UTILITY"+maxUtility);
             return maxUtility;
         }else {
             int minUtility= Integer.MAX_VALUE;
-            for(int i=0; i<possibleMoves.size(); i++){
-                checkersBoard= board.clone();
-                int result = getUtility(level-1, otherPlayer(player),checkersBoard, !myPlayer );
+            for(int i=0; i<successors.size(); i++){
+                child = board.clone();
+                try {
+                    child.processMove(successors.get(i));
+                } catch (BadMoveException ex) {
+                    System.err.println(ex.getMessage());
+
+                }
+                int result = getUtility(level-1, otherPlayer(player),child, !myPlayer );
                 if(result <minUtility){
                     minUtility = result;
                 }
             }
-            System.out.println("MIN UTILITY"+minUtility);
             return minUtility;
         }
     }
