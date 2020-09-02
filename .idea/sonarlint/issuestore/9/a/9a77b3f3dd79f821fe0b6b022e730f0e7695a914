@@ -1,3 +1,10 @@
 
-H
-java:S2160"+Override the "equals" method in this class.(íÀ†Î8™´µÖÄ.
+G
+java:S14810"*Remove this unused "child" local variable.(ğ¨¶ğ8‡Ğ¶æÄ.
+U	java:S106A"9Replace this use of System.out or System.err by a logger.(•¬ªĞ8‡Ğ¶æÄ.
+X	java:S125^"<This block of commented-out lines of code should be removed.(„òûÂ8òÑÉæÄ.
+U	java:S106{"9Replace this use of System.out or System.err by a logger.(•¬ªĞ8äáæÄ.
+X	java:S125f"<This block of commented-out lines of code should be removed.(‡‚—­8ÉÜÎæÄ.
+U	java:S106k"9Replace this use of System.out or System.err by a logger.(•¬ªĞ8—íİæÄ.
+t
+java:S3776W"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(Ô—ìûùÿÿÿÿ8—íİæÄ.
