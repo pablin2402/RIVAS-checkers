@@ -5,7 +5,6 @@ import checkers.CheckersMove;
 import checkers.CheckersPlayer;
 
 
-import java.util.List;
 
 public class RivasBot implements CheckersPlayer {
     private static final boolean PLAYER = true; //true is black
@@ -13,15 +12,8 @@ public class RivasBot implements CheckersPlayer {
 
     @Override
     public CheckersMove play(CheckersBoard board)  {
-
-        List<CheckersMove> possibleCaptures = board.possibleCaptures();
-        if (possibleCaptures.isEmpty()) {
-            return getBuild(board);
-        }
         return getBuild(board);
-
     }
-
     private CheckersMove getBuild(CheckersBoard board)
     {
         CheckersPablo check = new CheckersPablo();
