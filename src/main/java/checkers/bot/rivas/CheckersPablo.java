@@ -26,8 +26,9 @@ public class CheckersPablo extends CheckersBoard {
     }
 
     private CheckersMove getBestMoveOption(CheckersBoard board, boolean myPlayer, int level, Player startingPlayer) {
-        CheckersMove bestMoveOption = null;
 
+        //
+        CheckersMove bestMoveOption = null;
         int maxValue = Integer.MIN_VALUE;
         int childScore = 0;
         for (CheckersMove successor : successors) {
@@ -62,7 +63,9 @@ public class CheckersPablo extends CheckersBoard {
     }
 
     private int getUtility(MyPlayerGame myPlayer) {
-
+        //TODO: intento de poda alpha beta
+        int alpha =Integer.MIN_VALUE;
+        int beta = Integer.MAX_VALUE;
         if (successors.isEmpty()) {
             return heuristic(myPlayer.getBoard());
         }
@@ -71,13 +74,13 @@ public class CheckersPablo extends CheckersBoard {
         }
         generatePossibleMovesAndCaptures(myPlayer.getBoard());
         if (myPlayer.isMyPlayer()) {
-            return maxUtilityForMyPlayer(myPlayer.getLevel(), myPlayer.getStartingPlayer(), myPlayer.getBoard(), myPlayer.isMyPlayer());
+            return maxUtilityForMyPlayer(myPlayer.getLevel(), myPlayer.getStartingPlayer(), myPlayer.getBoard(), myPlayer.isMyPlayer(), alpha, beta);
         } else {
-            return minUtilityForOtherBot(myPlayer.getLevel(), myPlayer.getStartingPlayer(), myPlayer.getBoard(), myPlayer.isMyPlayer());
+            return minUtilityForOtherBot(myPlayer.getLevel(), myPlayer.getStartingPlayer(), myPlayer.getBoard(), myPlayer.isMyPlayer(), alpha, beta);
         }
     }
 
-    private int minUtilityForOtherBot(int level, Player player, CheckersBoard board, boolean myPlayer) {
+    private int minUtilityForOtherBot(int level, Player player, CheckersBoard board, boolean myPlayer, int alpha, int beta) {
         CheckersBoard child;
         int minUtility = Integer.MAX_VALUE;
         for (CheckersMove successor : successors) {
@@ -90,14 +93,16 @@ public class CheckersPablo extends CheckersBoard {
             }
             MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer, level - 1, otherPlayer(player));
             int utility = getUtility(myPlayerGame);
-            if (utility < minUtility) {
-                minUtility = utility;
+            minUtility = Math.min(utility, minUtility);
+            beta = Math.min(beta, minUtility);
+            if(alpha >= beta) {
+                break;
             }
         }
         return minUtility;
     }
 
-    private int maxUtilityForMyPlayer(int level, Player player, CheckersBoard board, boolean myPlayer) {
+    private int maxUtilityForMyPlayer(int level, Player player, CheckersBoard board, boolean myPlayer, int alpha, int beta) {
         CheckersBoard child;
         int maxUtility = Integer.MIN_VALUE;
         for (CheckersMove successor : successors) {
@@ -111,9 +116,13 @@ public class CheckersPablo extends CheckersBoard {
             MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer, level - 1, otherPlayer(player));
 
             int utility = getUtility(myPlayerGame);
-            if (utility > maxUtility) {
-                maxUtility = utility;
+            maxUtility = Math.max(utility, maxUtility);
+            alpha = Math.max(alpha, maxUtility);
+            if(alpha >= beta) {
+                break;
+
             }
+
         }
         return maxUtility;
     }

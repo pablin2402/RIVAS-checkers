@@ -8,7 +8,7 @@ import checkers.CheckersPlayer;
 
 public class RivasBot implements CheckersPlayer {
     private static final boolean PLAYER = true; //true is black
-    private static final int LEVEL =5;
+    private static final int LEVEL =7;
 
     @Override
     public CheckersMove play(CheckersBoard board)  {
