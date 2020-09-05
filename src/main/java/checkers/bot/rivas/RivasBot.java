@@ -12,9 +12,9 @@ public class RivasBot implements CheckersPlayer {
 
     @Override
     public CheckersMove play(CheckersBoard board)  {
-        return getBuild(board);
+        return getBuilder(board);
     }
-    private CheckersMove getBuild(CheckersBoard board)
+    private CheckersMove getBuilder(CheckersBoard board)
     {
         CheckersPablo check = new CheckersPablo();
         CheckersMove move = check.getBestMove(board, PLAYER,LEVEL);

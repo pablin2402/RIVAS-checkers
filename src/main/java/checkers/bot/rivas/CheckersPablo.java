@@ -4,9 +4,7 @@ import checkers.CheckersBoard;
 import checkers.CheckersMove;
 import checkers.exception.BadMoveException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 public class CheckersPablo extends CheckersBoard {
@@ -15,19 +13,12 @@ public class CheckersPablo extends CheckersBoard {
         CheckersBoard.Player startingPlayer;
         startingPlayer = CheckersBoard.initBoard().getCurrentPlayer();
         generatePossibleMovesAndCaptures(board);
-        return getCheckersMove(board, myPlayer, level, startingPlayer);
+        return getBestMoveOption(board, myPlayer, level, startingPlayer);
     }
-
-    private CheckersMove getCheckersMove(CheckersBoard board, boolean myPlayer, int level, Player startingPlayer) {
+    private CheckersMove getBestMoveOption(CheckersBoard board, boolean myPlayer, int level, Player startingPlayer) {
         if (successors.isEmpty()) {
             return null;
         }
-        return getBestMoveOption(board, myPlayer, level, startingPlayer);
-    }
-
-    private CheckersMove getBestMoveOption(CheckersBoard board, boolean myPlayer, int level, Player startingPlayer) {
-
-        //
         CheckersMove bestMoveOption = null;
         int maxValue = Integer.MIN_VALUE;
         int childScore = 0;
@@ -36,7 +27,7 @@ public class CheckersPablo extends CheckersBoard {
             try {
                 child.processMove(successor);
             } catch (BadMoveException ex) {
-                System.err.println(ex.getMessage());
+                throw new IllegalStateException("Invalid Move ?.... What happened my friend, you used to be cool."+ ex.getMessage());
             }
             MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer, level - 1, otherPlayer(startingPlayer));
             childScore = getUtility(myPlayerGame);
@@ -63,7 +54,6 @@ public class CheckersPablo extends CheckersBoard {
     }
 
     private int getUtility(MyPlayerGame myPlayer) {
-        //TODO: intento de poda alpha beta
         int alpha =Integer.MIN_VALUE;
         int beta = Integer.MAX_VALUE;
         if (successors.isEmpty()) {
@@ -73,25 +63,26 @@ public class CheckersPablo extends CheckersBoard {
             return heuristic(myPlayer.getBoard());
         }
         generatePossibleMovesAndCaptures(myPlayer.getBoard());
+        MyPlayerGame myPlayerGame = new MyPlayerGame(myPlayer.getBoard(),myPlayer.isMyPlayer(),myPlayer.getLevel(), myPlayer.getStartingPlayer());
         if (myPlayer.isMyPlayer()) {
-            return maxUtilityForMyPlayer(myPlayer.getLevel(), myPlayer.getStartingPlayer(), myPlayer.getBoard(), myPlayer.isMyPlayer(), alpha, beta);
+            return maxUtilityForMyPlayer(myPlayerGame, alpha, beta);
         } else {
-            return minUtilityForOtherBot(myPlayer.getLevel(), myPlayer.getStartingPlayer(), myPlayer.getBoard(), myPlayer.isMyPlayer(), alpha, beta);
+            return minUtilityForOtherBot(myPlayerGame, alpha, beta);
         }
     }
 
-    private int minUtilityForOtherBot(int level, Player player, CheckersBoard board, boolean myPlayer, int alpha, int beta) {
+    private int minUtilityForOtherBot(MyPlayerGame myPlayer, int alpha, int beta) {
         CheckersBoard child;
         int minUtility = Integer.MAX_VALUE;
         for (CheckersMove successor : successors) {
-            child = board.clone();
+            child = myPlayer.getBoard().clone();
             try {
                 child.processMove(successor);
             } catch (BadMoveException ex) {
                 System.err.println(ex.getMessage());
 
             }
-            MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer, level - 1, otherPlayer(player));
+            MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer.isMyPlayer(), myPlayer.getLevel() - 1, otherPlayer(myPlayer.getStartingPlayer()));
             int utility = getUtility(myPlayerGame);
             minUtility = Math.min(utility, minUtility);
             beta = Math.min(beta, minUtility);
@@ -102,18 +93,18 @@ public class CheckersPablo extends CheckersBoard {
         return minUtility;
     }
 
-    private int maxUtilityForMyPlayer(int level, Player player, CheckersBoard board, boolean myPlayer, int alpha, int beta) {
+    private int maxUtilityForMyPlayer(MyPlayerGame myPlayer, int alpha, int beta) {
         CheckersBoard child;
         int maxUtility = Integer.MIN_VALUE;
         for (CheckersMove successor : successors) {
-            child = board.clone();
+            child = myPlayer.getBoard().clone();
             try {
                 child.processMove(successor);
             } catch (BadMoveException ex) {
                 System.err.println(ex.getMessage());
 
             }
-            MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer, level - 1, otherPlayer(player));
+            MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer.isMyPlayer(), myPlayer.getLevel() - 1, otherPlayer(myPlayer.getStartingPlayer()));
 
             int utility = getUtility(myPlayerGame);
             maxUtility = Math.max(utility, maxUtility);
@@ -144,7 +135,6 @@ public class CheckersPablo extends CheckersBoard {
         }
         return result;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
