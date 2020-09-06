@@ -3,12 +3,12 @@ package checkers.bot.rivas;
 import checkers.CheckersBoard;
 import checkers.CheckersMove;
 import checkers.exception.BadMoveException;
-
 import java.util.*;
 
 
 public class CheckersPablo extends CheckersBoard {
     List<CheckersMove> successors = new ArrayList<>(1000);
+
     protected CheckersMove getBestMove(CheckersBoard board, boolean myPlayer, int level) {
         CheckersBoard.Player startingPlayer;
         startingPlayer = CheckersBoard.initBoard().getCurrentPlayer();
@@ -21,7 +21,7 @@ public class CheckersPablo extends CheckersBoard {
         }
         CheckersMove bestMoveOption = null;
         int maxValue = Integer.MIN_VALUE;
-        int childScore = 0;
+        int childScore;
         for (CheckersMove successor : successors) {
             CheckersBoard child = board.clone();
             try {
@@ -29,8 +29,11 @@ public class CheckersPablo extends CheckersBoard {
             } catch (BadMoveException ex) {
                 throw new IllegalStateException("Invalid Move ?.... What happened my friend, you used to be cool."+ ex.getMessage());
             }
-            MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer, level - 1, otherPlayer(startingPlayer));
-            childScore = getUtility(myPlayerGame);
+            MyPlayerGame builder =MyPlayerGame.build()
+                    .builder(child, !myPlayer)
+                    .builderTo(level - 1, otherPlayer(startingPlayer))
+                    .build();
+            childScore = getUtility(builder);
             if (childScore > maxValue) {
                 maxValue = childScore;
                 bestMoveOption = successor;
@@ -50,11 +53,31 @@ public class CheckersPablo extends CheckersBoard {
         } else {
             children = board.possibleCaptures();
         }
+
         this.successors = children;
+    }
+    private Map<CheckersMove, Integer> getUtilityMap(MyPlayerGame myPlayer) {
+        CheckersBoard child;
+        Map<CheckersMove, Integer> utilityMap = new HashMap<>();
+        for (CheckersMove successor: successors) {
+            child = myPlayer.getBoard().clone();
+            try {
+                child.processMove(successor);
+            } catch (BadMoveException ex) {
+                System.err.println(ex.getMessage());
+
+            }
+            MyPlayerGame builder = MyPlayerGame.build()
+                    .builder(child, !myPlayer.isMyPlayer())
+                    .builderTo(myPlayer.getLevel() - 1, otherPlayer(myPlayer.getStartingPlayer()))
+                    .build();
+            utilityMap.put(successor, getUtility(builder));
+        }
+        return utilityMap;
     }
 
     private int getUtility(MyPlayerGame myPlayer) {
-        int alpha =Integer.MIN_VALUE;
+        int alpha = Integer.MIN_VALUE;
         int beta = Integer.MAX_VALUE;
         if (successors.isEmpty()) {
             return heuristic(myPlayer.getBoard());
@@ -63,28 +86,18 @@ public class CheckersPablo extends CheckersBoard {
             return heuristic(myPlayer.getBoard());
         }
         generatePossibleMovesAndCaptures(myPlayer.getBoard());
-        MyPlayerGame myPlayerGame = new MyPlayerGame(myPlayer.getBoard(),myPlayer.isMyPlayer(),myPlayer.getLevel(), myPlayer.getStartingPlayer());
+        Map<CheckersMove, Integer> utilityMap = getUtilityMap(myPlayer);
+
         if (myPlayer.isMyPlayer()) {
-            return maxUtilityForMyPlayer(myPlayerGame, alpha, beta);
+            return maxUtilityForMyPlayer(utilityMap,alpha, beta);
         } else {
-            return minUtilityForOtherBot(myPlayerGame, alpha, beta);
+            return minUtilityForOtherBot(utilityMap, alpha, beta);
         }
     }
-
-    private int minUtilityForOtherBot(MyPlayerGame myPlayer, int alpha, int beta) {
-        CheckersBoard child;
+    private int minUtilityForOtherBot( Map<CheckersMove, Integer> utilityMap, int alpha, int beta) {
         int minUtility = Integer.MAX_VALUE;
-        for (CheckersMove successor : successors) {
-            child = myPlayer.getBoard().clone();
-            try {
-                child.processMove(successor);
-            } catch (BadMoveException ex) {
-                System.err.println(ex.getMessage());
-
-            }
-            MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer.isMyPlayer(), myPlayer.getLevel() - 1, otherPlayer(myPlayer.getStartingPlayer()));
-            int utility = getUtility(myPlayerGame);
-            minUtility = Math.min(utility, minUtility);
+        for (Map.Entry<CheckersMove, Integer> utilityEntry: utilityMap.entrySet()) {
+            minUtility = Math.min(utilityEntry.getValue(), minUtility);
             beta = Math.min(beta, minUtility);
             if(alpha >= beta) {
                 break;
@@ -93,35 +106,23 @@ public class CheckersPablo extends CheckersBoard {
         return minUtility;
     }
 
-    private int maxUtilityForMyPlayer(MyPlayerGame myPlayer, int alpha, int beta) {
-        CheckersBoard child;
+    private int maxUtilityForMyPlayer( Map<CheckersMove, Integer> utilityMap, int alpha, int beta) {
         int maxUtility = Integer.MIN_VALUE;
-        for (CheckersMove successor : successors) {
-            child = myPlayer.getBoard().clone();
-            try {
-                child.processMove(successor);
-            } catch (BadMoveException ex) {
-                System.err.println(ex.getMessage());
-
-            }
-            MyPlayerGame myPlayerGame = new MyPlayerGame(child, !myPlayer.isMyPlayer(), myPlayer.getLevel() - 1, otherPlayer(myPlayer.getStartingPlayer()));
-
-            int utility = getUtility(myPlayerGame);
-            maxUtility = Math.max(utility, maxUtility);
+        for (Map.Entry<CheckersMove, Integer> utilityEntry: utilityMap.entrySet()) {
+            maxUtility = Math.max(utilityEntry.getValue(), maxUtility);
             alpha = Math.max(alpha, maxUtility);
             if(alpha >= beta) {
                 break;
-
             }
-
         }
         return maxUtility;
     }
     private int heuristic(CheckersBoard b) {
+        final int SIZE = 8;
         int result = 0;
         char[][] board = b.getBoard();
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < SIZE ; i++) {
+            for (int j = 0; j < SIZE ; j++) {
                 if (board[i][j] == BLACK_PLAIN) {
                     result += 2;
                 } else if (board[i][j] == RED_PLAIN) {

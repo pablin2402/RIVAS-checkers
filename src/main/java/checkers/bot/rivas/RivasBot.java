@@ -8,13 +8,13 @@ import checkers.CheckersPlayer;
 
 public class RivasBot implements CheckersPlayer {
     private static final boolean PLAYER = true; //true is black
-    private static final int LEVEL =7;
+    private static final int LEVEL =5;
 
     @Override
     public CheckersMove play(CheckersBoard board)  {
-        return getBuilder(board);
+        return getBuilderPosition(board);
     }
-    private CheckersMove getBuilder(CheckersBoard board)
+    private CheckersMove getBuilderPosition(CheckersBoard board)
     {
         CheckersPablo check = new CheckersPablo();
         CheckersMove move = check.getBestMove(board, PLAYER,LEVEL);

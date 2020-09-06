@@ -3,17 +3,13 @@ package checkers.bot.rivas;
 import checkers.CheckersBoard;
 
 public class MyPlayerGame {
-    private final CheckersBoard board;
-    private final boolean myPlayer;
-    private final int level;
-    private final CheckersBoard.Player startingPlayer;
+    public static Build build() {return new Build();}
+    private CheckersBoard board;
+    private boolean myPlayer;
+    private int level;
+    private CheckersBoard.Player startingPlayer;
 
-    public MyPlayerGame(CheckersBoard board, boolean myPlayer, int level, CheckersBoard.Player startingPlayer) {
-        this.board = board;
-        this.myPlayer = myPlayer;
-        this.level = level;
-        this.startingPlayer = startingPlayer;
-    }
+    private MyPlayerGame (){}
     public CheckersBoard getBoard() {
         return board;
     }
@@ -25,6 +21,28 @@ public class MyPlayerGame {
     }
     public CheckersBoard.Player getStartingPlayer() {
         return startingPlayer;
+    }
+    public static class  Build {
+        private final MyPlayerGame myPlayerGame;
+        private Build() {
+            myPlayerGame = new MyPlayerGame();
+        }
+
+        public MyPlayerGame.Build builder(CheckersBoard board, boolean myPlayer) {
+            myPlayerGame.board = board;
+            myPlayerGame.myPlayer = myPlayer;
+            return this;
+        }
+
+        public MyPlayerGame.Build builderTo(int level, CheckersBoard.Player startingPlayer) {
+            myPlayerGame.level = level;
+            myPlayerGame.startingPlayer = startingPlayer;
+            return this;
+        }
+
+        public MyPlayerGame build() {
+            return myPlayerGame;
+        }
     }
 
 }
