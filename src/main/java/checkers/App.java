@@ -4,7 +4,6 @@
 package checkers;
 
 import checkers.bot.gray.GrayRandomBot;
-import checkers.bot.rivas.RivasBot;
 
 import java.util.Optional;
 

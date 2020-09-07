@@ -27,10 +27,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="965cc84f-f3d4-4f28-a3f1-693a7840b0db" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/3/3324e175f02fe9faced0417fe85590b75afd1be6" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/3/3324e175f02fe9faced0417fe85590b75afd1be6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/a/9a77b3f3dd79f821fe0b6b022e730f0e7695a914" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/a/9a77b3f3dd79f821fe0b6b022e730f0e7695a914" afterDir="false" />
-    </list>
+    <list default="true" id="965cc84f-f3d4-4f28-a3f1-693a7840b0db" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
