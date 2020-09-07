@@ -12,11 +12,11 @@ public class App {
 
     public static void main(String[] args) {
         CheckersBoard game = CheckersBoard.initBoard();
-        CheckersPlayer player1 = new GrayRandomBot();
-        CheckersPlayer player2 = new RivasBot();
-
+        CheckersPlayer player1 = new KeyboardPlayer();
+        CheckersPlayer player2 = new GrayRandomBot();
         Optional<CheckersPlayer> loser = game.play(player1, player2);
         loser.ifPresent(//
                 checkersPlayer -> System.out.println("LOSER! " + checkersPlayer.getClass().getName()));
     }
+
 }
