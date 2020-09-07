@@ -8,7 +8,7 @@ import java.util.Optional;
 
 
 public class RivasBot implements CheckersPlayer {
-    private static final boolean PLAYER = true; //true is black
+    private static final boolean PLAYER = true; //false is player 1
     private static final int LEVEL =5;
 
     @Override

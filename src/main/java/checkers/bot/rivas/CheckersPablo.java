@@ -84,10 +84,10 @@ public class CheckersPablo extends CheckersBoard {
         int alpha = Integer.MIN_VALUE;
         int beta = Integer.MAX_VALUE;
         if (successors.isEmpty()) {
-            return heuristic(myPlayer.getBoard());
+            return heuristic(myPlayer.getBoard(), myPlayer.isMyPlayer());
         }
         if (myPlayer.getLevel() == 0) {
-            return heuristic(myPlayer.getBoard());
+            return heuristic(myPlayer.getBoard(),myPlayer.isMyPlayer());
         }
         generatePossibleMovesAndCaptures(myPlayer.getBoard());
         Map<CheckersMove, Integer> utilityMap = getUtilityMap(myPlayer);
@@ -121,21 +121,34 @@ public class CheckersPablo extends CheckersBoard {
         }
         return maxUtility;
     }
-    private int heuristic(CheckersBoard b) {
+    private int heuristic(CheckersBoard b, boolean player) {
         final int SIZE = 8;
         int result = 0;
         char[][] board = b.getBoard();
         for (int i = 0; i < SIZE ; i++) {
             for (int j = 0; j < SIZE ; j++) {
-                if (board[i][j] == BLACK_PLAIN) {
-                    result += 2;
-                } else if (board[i][j] == RED_PLAIN) {
-                    result -= 2;
-                } else if (board[i][j] == BLACK_CROWNED) {
-                    result += 5;
-                } else if (board[i][j] == RED_CROWNED) {
-                    result -= 5;
+                if(player){
+                    if (board[i][j] == BLACK_PLAIN) {
+                        result += 2;
+                    } else if (board[i][j] == RED_PLAIN) {
+                        result -= 2;
+                    } else if (board[i][j] == BLACK_CROWNED) {
+                        result += 5;
+                    } else if (board[i][j] == RED_CROWNED) {
+                        result -= 5;
+                    }
+                }else{
+                    if (board[i][j] == BLACK_PLAIN) {
+                        result -= 2;
+                    } else if (board[i][j] == RED_PLAIN) {
+                        result += 2;
+                    } else if (board[i][j] == BLACK_CROWNED) {
+                        result -= 5;
+                    } else if (board[i][j] == RED_CROWNED) {
+                        result += 5;
+                    }
                 }
+
             }
         }
         return result;
