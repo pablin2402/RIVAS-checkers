@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class RivasBot implements CheckersPlayer {
     private static final boolean PLAYER = true; //false is player 1
-    private static final int LEVEL =5;
+    private static final int LEVEL =7;
 
     @Override
     public CheckersMove play(CheckersBoard board)  {
