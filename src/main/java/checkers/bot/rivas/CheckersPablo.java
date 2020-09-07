@@ -3,21 +3,25 @@ package checkers.bot.rivas;
 import checkers.CheckersBoard;
 import checkers.CheckersMove;
 import checkers.exception.BadMoveException;
-import java.util.*;
 
+import java.util.Optional;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class CheckersPablo extends CheckersBoard {
     List<CheckersMove> successors = new ArrayList<>(1000);
-
-    protected CheckersMove getBestMove(CheckersBoard board, boolean myPlayer, int level) {
+    protected Optional<CheckersMove> getBestMove(CheckersBoard board, boolean myPlayer, int level) {
         CheckersBoard.Player startingPlayer;
         startingPlayer = CheckersBoard.initBoard().getCurrentPlayer();
         generatePossibleMovesAndCaptures(board);
         return getBestMoveOption(board, myPlayer, level, startingPlayer);
     }
-    private CheckersMove getBestMoveOption(CheckersBoard board, boolean myPlayer, int level, Player startingPlayer) {
+    private Optional<CheckersMove> getBestMoveOption(CheckersBoard board, boolean myPlayer, int level, Player startingPlayer) {
         if (successors.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
         CheckersMove bestMoveOption = null;
         int maxValue = Integer.MIN_VALUE;
@@ -42,7 +46,7 @@ public class CheckersPablo extends CheckersBoard {
                 bestMoveOption = successor;
             }
         }
-        return bestMoveOption;
+        return Optional.of(bestMoveOption);
     }
 
     private void generatePossibleMovesAndCaptures(CheckersBoard board) {

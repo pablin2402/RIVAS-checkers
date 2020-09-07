@@ -4,6 +4,7 @@ import checkers.CheckersBoard;
 import checkers.CheckersMove;
 import checkers.CheckersPlayer;
 
+import java.util.Optional;
 
 
 public class RivasBot implements CheckersPlayer {
@@ -17,10 +18,10 @@ public class RivasBot implements CheckersPlayer {
     private CheckersMove getBuilderPosition(CheckersBoard board)
     {
         CheckersPablo check = new CheckersPablo();
-        CheckersMove move = check.getBestMove(board, PLAYER,LEVEL);
+        Optional<CheckersMove> move = check.getBestMove(board, PLAYER,LEVEL);
         return CheckersMove.builder()
-                .fromPosition(move.getStartRow(), move.getStartCol())
-                .toPosition(move.getEndRow(), move.getEndCol())
+                .fromPosition(move.orElseThrow().getStartRow(), move.orElseThrow().getStartCol())
+                .toPosition(move.orElseThrow().getEndRow(), move.orElseThrow().getEndCol())
                 .build();
     }
 }
