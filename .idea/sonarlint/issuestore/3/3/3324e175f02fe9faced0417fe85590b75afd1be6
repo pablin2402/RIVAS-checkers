@@ -1,26 +1,26 @@
 
-j
-java:S11829"HUse super.clone() to create and seed the cloned instance to be returned.(ãÚÕçıÿÿÿÿ8Áø´ÓÄ.
-U	java:S106x"9Replace this use of System.out or System.err by a logger.(ñ› Ğ8Áø´ÓÄ.
-Z	java:S106|"9Replace this use of System.out or System.err by a logger.(ó†Äªıÿÿÿÿ8Áø´ÓÄ.
 [	java:S106Â"9Replace this use of System.out or System.err by a logger.(Ï×¦½úÿÿÿÿ8Áø´ÓÄ.
-u
-java:S3776å"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(ğ½å–şÿÿÿÿ8Áø´ÓÄ.
-Z	java:S106z"9Replace this use of System.out or System.err by a logger.(„–‘§úÿÿÿÿ8Áø´ÓÄ.
+{	java:S135è"YReduce the total number of break and continue statements in this loop to use at most one.(¯š¸Ôıÿÿÿÿ8Áø´ÓÄ.
+V	java:S106Î"9Replace this use of System.out or System.err by a logger.(•¬ªĞ8Áø´ÓÄ.
+U	java:S106Ğ"9Replace this use of System.out or System.err by a logger.(å®µ8Áø´ÓÄ.
 u
 java:S3776¬"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(ü«İÙüÿÿÿÿ8Áø´ÓÄ.
-J
-java:S1602³",Remove useless curly braces around statement(Ãé¥ó8Áø´ÓÄ.
-u
-java:S29759"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ãÚÕçıÿÿÿÿ8Áø´ÓÄ.
 p
 java:S3776®"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(•‹¼–8Áø´ÓÄ.
-[	java:S106´"9Replace this use of System.out or System.err by a logger.(İ˜Œƒøÿÿÿÿ8Áø´ÓÄ.
-U	java:S106Ğ"9Replace this use of System.out or System.err by a logger.(å®µ8Áø´ÓÄ.
+U	java:S106x"9Replace this use of System.out or System.err by a logger.(ñ› Ğ8Áø´ÓÄ.
+Z	java:S106z"9Replace this use of System.out or System.err by a logger.(„–‘§úÿÿÿÿ8Áø´ÓÄ.
 U	java:S106s"9Replace this use of System.out or System.err by a logger.(ˆ¦¡¥8Áø´ÓÄ.
+u
+java:S29759"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ãÚÕçıÿÿÿÿ8Áø´ÓÄ.
+j
+java:S11829"HUse super.clone() to create and seed the cloned instance to be returned.(ãÚÕçıÿÿÿÿ8Áø´ÓÄ.
 Z	java:S106u"9Replace this use of System.out or System.err by a logger.(ó†Äªıÿÿÿÿ8Áø´ÓÄ.
-Z	java:S106}"9Replace this use of System.out or System.err by a logger.(©º†îùÿÿÿÿ8Áø´ÓÄ.
-V	java:S106Î"9Replace this use of System.out or System.err by a logger.(•¬ªĞ8Áø´ÓÄ.
+J
+java:S1602³",Remove useless curly braces around statement(Ãé¥ó8Áø´ÓÄ.
 [	java:S106Û"9Replace this use of System.out or System.err by a logger.(ì¿Ğúÿÿÿÿ8Áø´ÓÄ.
-{	java:S135è"YReduce the total number of break and continue statements in this loop to use at most one.(¯š¸Ôıÿÿÿÿ8Áø´ÓÄ.
 U	java:S106v"9Replace this use of System.out or System.err by a logger.(Ù©È±8Áø´ÓÄ.
+Z	java:S106}"9Replace this use of System.out or System.err by a logger.(©º†îùÿÿÿÿ8Áø´ÓÄ.
+[	java:S106´"9Replace this use of System.out or System.err by a logger.(İ˜Œƒøÿÿÿÿ8Áø´ÓÄ.
+Z	java:S106|"9Replace this use of System.out or System.err by a logger.(ó†Äªıÿÿÿÿ8Áø´ÓÄ.
+u
+java:S3776å"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(ğ½å–şÿÿÿÿ8Áø´ÓÄ.
